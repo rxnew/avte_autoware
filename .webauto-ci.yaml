@@ -18,6 +18,7 @@ artifacts:
           exec: "true"
       output_container_image:
         from: init
+        workdir: /autoware
 
 simulations:
   - name: planning_sim
@@ -28,7 +29,6 @@ simulations:
         artifact: planning
       runtime:
         type: standard1/arm64/medium
-        workdir: /autoware
       parameters:
         launch_autoware: "true"
         autoware_launch_package: autoware_launch
