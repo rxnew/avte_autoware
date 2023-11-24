@@ -11,12 +11,13 @@ artifacts:
           repositories_files:
             - autoware.repos
           import_path: src
-      linux_parameters:
-        kernel_version: 4.9.253-rqx58g
       base_container_image:
         from: ghcr.io/oguzkaganozt/autoware-openadk:planning-demo-before-ota-aarch64
-
-
+      phases:
+        - name: init
+          exec: "true"
+      output_container_image:
+        from: init
 
 simulations:
   - name: planning_sim
