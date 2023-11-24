@@ -1,7 +1,7 @@
 version: 2
 
 artifacts:
-  - name: object-recognition
+  - name: planning
     build:
       type: custom
       runtime:
