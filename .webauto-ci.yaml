@@ -14,7 +14,7 @@ artifacts:
       linux_parameters:
         kernel_version: 4.9.253-rqx58g
       base_container_image:
-        from: https://github.com/users/oguzkaganozt/packages/container/package/autoware-openadk
+        from: ghcr.io/oguzkaganozt/autoware-openadk:planning-demo-before-ota-aarch64
 
 
 
