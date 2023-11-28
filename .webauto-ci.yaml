@@ -19,6 +19,23 @@ artifacts:
       output_container_image:
         from: init
         workdir: /autoware
+  - name: scenario_simulator_v2
+    build:
+      type: custom
+      runtime:
+        type: standard1/arm64/large
+      source:
+        vcstool:
+          repositories_files:
+            - dependency_humble.repos
+          import_path: src
+      base_container_image:
+        from: eratostennis/scenario_simulator_v2:arm
+      phases:
+        - name: init
+          exec: "true"
+      output_container_image:
+        from: init
 
 simulations:
   - name: planning_sim
@@ -26,14 +43,29 @@ simulations:
     simulator:
       deployment:
         type: container
-        artifact: planning
+        artifact: scenario_simulator_v2
       runtime:
         type: standard1/arm64/medium
       parameters:
-        launch_autoware: "true"
+        launch_autoware: "false"
         autoware_launch_package: autoware_launch
         autoware_launch_file: planning_simulator.launch.xml
         architecture_type: awf/universe
         vehicle_model: sample_vehicle
         sensor_model: sample_sensor_kit
         initialize_duration: "45"
+    components:
+      - name: planning
+        deployment:
+          type: container
+          artifact: planning
+        runtime:
+          type: standard1/arm64/medium
+        application:
+          roslaunch:
+            package_name: autoware_launch
+            file_name: planning_simulator.launch.xml
+            arguments:
+              architecture_type: awf/universe
+              sensor_model: sample_sensor_kit
+              vehicle_model: sample_vehicle
