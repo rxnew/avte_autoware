@@ -44,7 +44,6 @@ artifacts:
               - .webauto-ci/scenario_simulator_v2/install-middleware/**/*
         - name: colcon-build
           exec: ./.webauto-ci/scenario_simulator_v2/colcon-build/run.sh
-          workdir: /home/ubuntu/Desktop/scenario_simulator_ws
           caches:
             - name: apt-lists
               mountpoint: /var/lib/apt/lists
