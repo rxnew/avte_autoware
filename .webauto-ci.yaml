@@ -34,7 +34,6 @@ artifacts:
       phases:
         - name: install-middleware
           exec: ./.webauto-ci/scenario_simulator_v2/install-middleware/run.sh
-          workdir: /home/ubuntu/Desktop/scenario_simulator_ws
           caches:
             - name: apt-lists
               mountpoint: /var/lib/apt/lists
