@@ -27,13 +27,14 @@ artifacts:
       source:
         vcstool:
           repositories_files:
-            - dependency_humble.repos
+            - autoware.repos
           import_path: src
       base_container_image:
         from: eratostennis/scenario_simulator_v2:arm
       phases:
-        - name: init
-          exec: "true"
+        - name: build
+          exec: 'cp -rfT $WEBAUTO_CI_SOURCE_PATH/src src && rosdep update && rosdep install -iry --from-paths src && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release'
+          workdir: /home/ubuntu/Desktop/scenario_simulator_ws
       output_container_image:
         from: init
 
