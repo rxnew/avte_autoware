@@ -36,7 +36,7 @@ artifacts:
           exec: 'cp -rfT $WEBAUTO_CI_SOURCE_PATH/src src && rosdep update && rosdep install -iry --from-paths src && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release'
           workdir: /home/ubuntu/Desktop/scenario_simulator_ws
       output_container_image:
-        from: init
+        from: build
 
 simulations:
   - name: planning_sim
