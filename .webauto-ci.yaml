@@ -30,10 +30,13 @@ artifacts:
             - autoware.repos
           import_path: src
       base_container_image:
-        from: ros:humble-ros-base-jammy
+        from: ubuntu:22.04
+      environment_variables:
+        DEBIAN_FRONTEND: noninteractive
+        LANG: C.UTF-8
       phases:
-        - name: install-middleware
-          exec: ./.webauto-ci/scenario_simulator_v2/install-middleware/run.sh
+        - name: setup-environment
+          exec: ./.webauto-ci/scenario_simulator_v2/setup-environment/run.sh
           caches:
             - name: apt-lists
               mountpoint: /var/lib/apt/lists
@@ -41,7 +44,12 @@ artifacts:
               mountpoint: /var/cache/apt/archives
           build_result_reuse:
             key_files:
-              - .webauto-ci/scenario_simulator_v2/install-middleware/**/*
+              - .webauto-ci/scenario_simulator_v2/setup-environment/**/*
+              - ansible/**/*
+              - ansible-galaxy-requirements.yaml
+              - amd64.env
+              - arm64.env
+              - setup-dev-env.sh
         - name: colcon-build
           exec: ./.webauto-ci/scenario_simulator_v2/colcon-build/run.sh
           environment_variables:
