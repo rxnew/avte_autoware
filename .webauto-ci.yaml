@@ -52,7 +52,7 @@ artifacts:
             - name: apt-archives
               mountpoint: /var/cache/apt/archives
       output_container_image:
-        from: build
+        from: colcon-build
         workdir: /home/ubuntu/Desktop/scenario_simulator_ws
 
 simulations:
