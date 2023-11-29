@@ -28,6 +28,7 @@ artifacts:
         vcstool:
           repositories_files:
             - autoware.repos
+            - simulator.repos
           import_path: src
       base_container_image:
         from: ubuntu:22.04
@@ -50,6 +51,8 @@ artifacts:
               - amd64.env
               - arm64.env
               - setup-dev-env.sh
+          incremental_build:
+            enabled: true
         - name: colcon-build
           exec: ./.webauto-ci/scenario_simulator_v2/colcon-build/run.sh
           environment_variables:
