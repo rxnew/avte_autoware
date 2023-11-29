@@ -30,13 +30,30 @@ artifacts:
             - autoware.repos
           import_path: src
       base_container_image:
-        from: eratostennis/scenario_simulator_v2:arm
+        from: ros:humble-ros-base-jammy
       phases:
-        - name: build
-          exec: 'cp -rfT $WEBAUTO_CI_SOURCE_PATH/src src && rosdep update && rosdep install -iry --from-paths src && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release'
+        - name: install-middleware
+          exec: ./.webauto-ci/scenario_simulator_v2/install-middleware/run.sh
           workdir: /home/ubuntu/Desktop/scenario_simulator_ws
+          caches:
+            - name: apt-lists
+              mountpoint: /var/lib/apt/lists
+            - name: apt-archives
+              mountpoint: /var/cache/apt/archives
+          build_result_reuse:
+            key_files:
+              - .webauto-ci/scenario_simulator_v2/install-middleware/**/*
+        - name: colcon-build
+          exec: ./.webauto-ci/scenario_simulator_v2/colcon-build/run.sh
+          workdir: /home/ubuntu/Desktop/scenario_simulator_ws
+          caches:
+            - name: apt-lists
+              mountpoint: /var/lib/apt/lists
+            - name: apt-archives
+              mountpoint: /var/cache/apt/archives
       output_container_image:
         from: build
+        workdir: /home/ubuntu/Desktop/scenario_simulator_ws
 
 simulations:
   - name: planning_sim
