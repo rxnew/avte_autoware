@@ -12,7 +12,7 @@ artifacts:
             - autoware.repos
           import_path: src
       base_container_image:
-        from: ghcr.io/oguzkaganozt/autoware-openadk:planning-demo-before-ota-aarch64
+        from: ghcr.io/oguzkaganozt/autoware-openadk:ces-planning-after-arm64
       phases:
         - name: init
           exec: "true"
@@ -70,3 +70,4 @@ simulations:
               sensor_model: sample_sensor_kit
               vehicle_model: sample_vehicle
               map_path: ${map_path}
+              scenario_simulation: "true"
