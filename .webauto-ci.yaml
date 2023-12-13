@@ -71,3 +71,5 @@ simulations:
               vehicle_model: sample_vehicle
               map_path: ${map_path}
               scenario_simulation: "true"
+              use_foa: "false"
+              perception/enable_traffic_light: "false"
