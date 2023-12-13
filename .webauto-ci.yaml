@@ -12,7 +12,7 @@ artifacts:
             - autoware.repos
           import_path: src
       base_container_image:
-        from: ghcr.io/oguzkaganozt/autoware-openadk:ces-planning-after-arm64
+        from: ghcr.io/oguzkaganozt/autoware-openadk:ces-planning-after-aarch64
       phases:
         - name: init
           exec: "true"
@@ -30,7 +30,7 @@ artifacts:
             - dependency_humble.repos
           import_path: src
       base_container_image:
-        from: eratostennis/scenario_simulator_v2:arm
+        from: ghcr.io/oguzkaganozt/autoware-openadk:ces-simulator-aarch64
       phases:
         - name: init
           exec: "true"
