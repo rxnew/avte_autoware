@@ -61,6 +61,8 @@ simulations:
           artifact: planning
         runtime:
           type: standard1/arm64/medium
+        environment_variables:
+          PATH: /autoware/install/trtexec_vendor/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         application:
           roslaunch:
             package_name: autoware_launch
